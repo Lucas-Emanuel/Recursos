@@ -1,3 +1,13 @@
+/* Software de uso livre
+   ___________________
+   >> NÃO COMERCIAL <<
+   ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+   Desenvolvido por Lucas Emanuel Lobo Costa
+   
+
+
+*/
+
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/DEFINIÇÕES/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
@@ -43,7 +53,7 @@ ISR(TIMER2_OVF_vect)
     
     else{
         counter[1] = 0;
-        Clock[1] = false;   //Torna clock[1] falso
+        Clock[1] = false;    //Torna clock[1] falso
         }           
     
     if(counter[1] >= 5){     //Se counter[1] for maior ou igual a 5
@@ -58,13 +68,13 @@ void leitura_dos_botoes() {
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=/LEITURA BOTÃO 1/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
      if (!digitalRead(botao) && (digitalRead(botao) != botaoant[1])){       //Detecta a borda de descida no sinal do botao
-      timeron[1] = true;                                                    //Liga o timer 1
+      timeron[1] = true;                                                    //Liga o Clock 1
       ok[1] = true;                                                         //OK se torna verdadeiro
      }
      
-     if (ok[1] && Clock[1]){                                                //aguarda o estouro do timer 1 para o cancelamento do efeito bouncin
-      timeron[1] = false;
-      ok[1] = false;
+     if (ok[1] && Clock[1]){                                                //aguarda o estouro do Clock 1 para o cancelamento do efeito bouncin
+      timeron[1] = false;                                                   //Desliga o Clock 1
+      ok[1] = false;                                                        //OK se torna verdadeiro
       // CODE IF
      
       
