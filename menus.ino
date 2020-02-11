@@ -1,35 +1,15 @@
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/DEFINIÇÕES/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
-#define botaol    13
-#define botaor    11
-#define botaook   12
+#define botao    13
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=/VARIÁVEIS/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
-boolean Clock[7],
-        ok[3],
-        botaoatu[3],
-        botaoant[3],
-        timeron[7],        
-        longpress,
-        shortpress,
-        pagina[4],
-        travamenu,
-        voltar,
-        zero[2],
-        blackout,
-        oldblackout,
-        botao[3];
-            
+boolean Clock[1],
+        ok[1],
+        botaoant[1],
+        timeron[1];       
 
-int debug[6],
-    counter[7];
-
-byte retorno,
-     menus = 0,     
-     fase = 0,
-     menusconfig[5];
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 void setup() {
  //-=-=-=-=-=-=-=-=-=-=-=-=-/configuração do timer 2/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|     
@@ -41,9 +21,7 @@ void setup() {
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=/DEFINIÇÃO DE PINOS/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
- pinMode(botaol    , INPUT_PULLUP );                 // configura o botão 1 como entrada com pull-up interno ligado
- pinMode(botaor    , INPUT_PULLUP );                 // configura o botão 2 como entrada com pull-up interno ligado
- pinMode(botaook   , INPUT_PULLUP );                 // configura o botão 3 como entrada com pull-up interno ligado
+ pinMode(botao , INPUT_PULLUP );                 // configura o botão 1 como entrada com pull-up interno ligado
 
  //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
@@ -77,17 +55,14 @@ ISR(TIMER2_OVF_vect)
 void leitura_dos_botoes() {   
    
    
-//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=/LEITURA BOTÃO 1/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|   
-   
-     botao[1] = false;
-     botaoatu[1] = digitalRead(botaol);                       //Lê o valor do botão1 e o atribui a variável (botaoatu[1])
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=/LEITURA BOTÃO 1/=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
 
-     if (!botaoatu[1] && (botaoatu[1] != botaoant[1])){       //Detecta a borda de descida no sinal do botao1
-      timeron[1] = true;
-      ok[1] = true;
+     if (!digitalRead(botao) && (digitalRead(botao) != botaoant[1])){       //Detecta a borda de descida no sinal do botao
+      timeron[1] = true;                                                    //Liga o timer 1
+      ok[1] = true;                                                         //OK se torna verdadeiro
      }
      
-     if (ok[1] && Clock[1]){                                  //Detecta a borda de descida no sinal do botao1
+     if (ok[1] && Clock[1]){                                                //aguarda o estouro do timer 1 para o cancelamento do efeito bouncin
       timeron[1] = false;
       ok[1] = false;
       // CODE IF
@@ -100,6 +75,6 @@ void leitura_dos_botoes() {
      
      }//end else
         
-     botaoant[1] = botaoatu[1] ;                              // atribui à variável (botaoant[1]) o valor de (botaoatu[1])
+     botaoant[1] = digitalRead(botao) ;                              // atribui à variável (botaoant[1]) o valor de (botaoatu[1])
   
 }//end input//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
